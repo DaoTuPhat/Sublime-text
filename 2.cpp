@@ -88,14 +88,43 @@ void merge_sort(int a[], int l, int r){
 	}
 }
 
+//  thuat toan sap xep vun dong heap_sort
+
+void heapify(int a[], int n, int i){
+	int m = i;
+	int l = 2 * i + 1;
+	int r = 2 * i + 2;
+	if(l < n && a[l] > a[m]){
+		m = l;
+	}
+	if(r < n && a[r] > a[m]){
+		m = r;
+	}
+	if(m != i){
+		swap(a[i], a[m]);
+		heapify(a, n, m);
+	}
+}
+
+void heap_sort(int a[], int n){
+	for(int i = n / 2 - 1; i >= 0; i--){
+		heapify(a, n, i);
+	}
+	for(int i = n - 1; i >= 0; i--){
+		swap(a[i], a[0]);
+		heapify(a, i, 0);
+	}
+}
+
 int main(){
 	int n;
 	cin >> n;
 	int a[n];
+	srand(time(NULL));
 	for(int i = 0; i < n; i++){
-		cin >> a[i];
+		a[i] = rand() % 500;
 	}
-	merge_sort(a, 0, n - 1);
+	heap_sort(a, n);
 	for(int i = 0; i < n; i++){
 		cout << a[i] << " ";
 	}

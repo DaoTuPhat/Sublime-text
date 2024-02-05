@@ -34,6 +34,68 @@ void insert_sort(int a[], int n){
 	}
 }
 
+void merge(int a[], int l, int m, int r){
+	vector<int> x(a + l, a + m + 1);
+	vector<int> y(a + m + 1, a + r + 1);
+	int i = 0, j = 0;
+	while(i < x.size() && j < y.size()){
+		if(x[i] <= y[j]){
+			a[l] = x[i];
+			l++;
+			i++;
+		}else{
+			a[l] = y[j];
+			l++;
+			j++;
+		}
+	} 
+	while(i < x.size()){
+		a[l] = x[i];
+		l++;
+		i++;
+	}
+	while(j < y.size()){
+		a[l] = y[j];
+		l++;
+		j++;
+	}
+}
+
+void merge_sort(int a[], int l, int r){
+	if(l < r){
+		int m = (l + r) / 2;
+		merge_sort(a, l, m);
+		merge_sort(a, m + 1, r);
+		merge(a, l, m, r);
+	}
+}
+
+void heapify(int a[], int n, int i){
+	int m = i;
+	int l = 2 * i + 1;
+	int r = 2 * i + 2;
+	if(l < n && a[l] > a[m]){
+		m = l;
+	}
+	if(r < n && a[r] > a[m]){
+		m = r;
+	}
+	if(m != i){
+		swap(a[i], a[m]);
+		heapify(a, n, m);
+	}
+}
+
+void heap_sort(int a[], int n){
+	for(int i = n / 2 - 1; i >= 0; i--){
+		heapify(a, n, i);
+	}
+	for(int i = n - 1; i >= 0; i--){
+		swap(a[i], a[0]);
+		heapify(a, i, 0);
+	}
+}
+
 int main(){
 	int n;
 	cin >> n;
@@ -42,7 +104,7 @@ int main(){
 	for(int i = 0; i < n; i++){
 		a[i] = rand() % 100;
 	}
-	insert_sort(a, n);
+	merge_sort(a, 0, n - 1);
 	for(int i = 0; i < n; i++){
 		cout << a[i] << " ";
 	}
