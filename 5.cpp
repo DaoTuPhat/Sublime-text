@@ -1,22 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-// sort(a, a + n, ...) sap xep theo chieu tang dan
-// sort(a, a + n, greater<int>()) sap xep theo chieu giam dan
-// stable_sort(a, a + n, ...) (giu nguyen vi tri ban dau neu cung dieu kien)
-// vd sap xep theo chieu tang dan gia tri tuyet doi 
-// 8 
-//1 -1 2 -3 1 -2 4 3
-//  output 1 -1 1 2 -2 -3 3 4
-
-bool cmp(int a, int b){
-	return abs(a) < abs(b);
-}
-
-
-// thuat toan sap xep chon selection_sort
 void selection_sort(int a[], int n){
-	for(int i = 0; i < (n - 1); i++){
+	for(int i = 0; i < n - 1; i++){
 		int min = i;
 		for(int j = i + 1; j < n; j++){
 			if(a[j] < a[min]){
@@ -27,7 +13,6 @@ void selection_sort(int a[], int n){
 	}
 }
 
-// thuat toan sap xep noi bot bubble_sort
 void bubble_sort(int a[], int n){
 	for(int i = n - 1; i >= 1; i--){
 		for(int j = 0; j < i; j++){
@@ -38,19 +23,16 @@ void bubble_sort(int a[], int n){
 	}
 }
 
-// thuat toan sap xep chen insertion_sort
-void insertion_sort(int a[], int n){
+void insert_sort(int a[], int n){
 	for(int i = 1; i < n; i++){
 		int x = a[i], tmp = i - 1;
 		while(tmp >= 0 && x < a[tmp]){
-			a[tmp + 1] = a[tmp];
+			a[tmp+1] = a[tmp];
 			tmp--;
 		}
-		a[tmp + 1] = x;
+		a[tmp+1] = x;
 	}
 }
-
-// thuat toan sap xep tron merge_sort
 
 void merge(int a[], int l, int m, int r){
 	vector<int> x(a + l, a + m + 1);
@@ -88,8 +70,6 @@ void merge_sort(int a[], int l, int r){
 	}
 }
 
-//  thuat toan sap xep vun dong heap_sort
-
 void heapify(int a[], int n, int i){
 	int m = i;
 	int l = 2 * i + 1;
@@ -116,8 +96,6 @@ void heap_sort(int a[], int n){
 	}
 }
 
-// thuat toan sap xep nhanh quick_sort
-
 int partition(int a[], int l, int r){
 	int pivot = a[r];
 	int i = l - 1;
@@ -143,8 +121,8 @@ void quick_sort(int a[], int l, int r){
 int main(){
 	int n;
 	cin >> n;
-	int a[n];
 	srand(time(NULL));
+	int a[n];
 	for(int i = 0; i < n; i++){
 		a[i] = rand() % 500;
 	}

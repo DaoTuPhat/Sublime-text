@@ -34,7 +34,7 @@ void insert_sort(int a[], int n){
 	}
 }
 
-void merge(int a[], int l, int m, int r){
+void merge(int a[] , int l, int m, int r){
 	vector<int> x(a + l, a + m + 1);
 	vector<int> y(a + m + 1, a + r + 1);
 	int i = 0, j = 0;
